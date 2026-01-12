@@ -141,4 +141,5 @@ curl -X POST http://localhost:8000/chat \
   -d '{"user_id": "test123", "message": "What plans do you offer?"}'
 ```
 <img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/6d8e0b34-2775-41f8-80df-4ca93f813af5" />
+<img width="2160" height="2160" alt="image" src="https://github.com/user-attachments/assets/e982d4e0-5987-439c-b664-a17a9e426208" />
 
