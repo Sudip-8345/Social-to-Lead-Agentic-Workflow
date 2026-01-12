@@ -1,0 +1,15 @@
+langgraph
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+langchain-groq
+langchain-chroma
+pydantic
+python-dotenv
+chromadb
+fastapi
+uvicorn
+redis
+twilio
+python-multipart
