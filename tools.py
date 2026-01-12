@@ -13,9 +13,16 @@ def mock_lead_capture(name: str, email: str, platform: str):
     '''
     print(f'[TOOL] Lead captured successfully: {name}, {email}, {platform}')
     return f"Lead captured: {name}, {email}, {platform}"
-
+  
 def is_valid_email(email: str) -> bool:
-    return '@' in email and '.' in email
+    """Check if email has @ and . after @"""
+    if '@' not in email:
+        return False
+    parts = email.split('@')
+    if len(parts) != 2:
+        return False
+    domain = parts[1]
+    return '.' in domain and len(domain) > 2
 
 # ===============Intent Classifier Tool ==================
 def intent_classifier(state: AgentState) -> dict:
@@ -100,7 +107,18 @@ def lead_capture_agent(state: AgentState) -> dict:
         new_info = data.get('collected', {})
         response_text = data.get('response_text', '')
         
+        # Filter empty values
         new_info = {k: v for k, v in new_info.items() if v}
+        
+        # Validate email format before accepting
+        if 'email' in new_info:
+            email = new_info['email']
+            if not is_valid_email(email):
+                return {
+                    'messages': [AIMessage(content=f"Hmm, '{email}' doesn't look like a valid email. Could you please provide a valid email address (e.g., name@example.com)?")],
+                    'user_info': user_info
+                }
+        
         updated_user_info = {**user_info, **new_info}
         
         return {

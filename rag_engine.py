@@ -19,6 +19,8 @@ def rag_responder(state: AgentState) -> dict:
     Question: {last_user_message}
     Context:
     {context}
+    Company: ServiceHive
+    Product: Inflx
     '''
     message = [SystemMessage(content=system_prompt)] + state['messages']
     response = llm.invoke(message)
